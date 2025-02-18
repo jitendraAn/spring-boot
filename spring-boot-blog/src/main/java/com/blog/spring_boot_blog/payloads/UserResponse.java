@@ -13,6 +13,7 @@ import java.util.List;
 @Getter
 public class UserResponse {
     private List<UserDTO> userDTOList;
+    private List<PostDTO>  postDTOList;
     private int pageNo;
     private int pageSize;
     private long totalPageElement;

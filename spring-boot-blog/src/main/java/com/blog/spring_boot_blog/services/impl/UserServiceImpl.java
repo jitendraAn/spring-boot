@@ -11,6 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -25,9 +27,12 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private ModelMapper modelMapper;
 
+    private final PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+
     @Override
     public UserDTO createUser(UserDTO user) {
         User user1 = modelMapper.map(user, User.class);
+        user1.setPassword(passwordEncoder.encode(user1.getPassword()));
         User user2 = userRepo.save(user1);
         return modelMapper.map(user2, UserDTO.class);
     }

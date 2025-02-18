@@ -1,26 +1,24 @@
-package com.blog.spring_boot_blog.entites;
+package com.blog.spring_boot_blog.payloads;
 
+import com.blog.spring_boot_blog.entites.Category;
+import com.blog.spring_boot_blog.entites.User;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.Date;
 
-@Entity
 @Data
 @NoArgsConstructor
-public class Post {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class PostDTO {
+
     private int postId;
     private String title;
     private String content;
     private String imageName;
     private Date addedDate;
 
-    @ManyToOne
-    private Category category;
+    private CategoryDTO category;
 
-    @ManyToOne
-    private  User user;
+    private UserDTO user;
 }
